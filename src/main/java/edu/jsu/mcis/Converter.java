@@ -57,6 +57,7 @@ public class Converter {
 				}
 				mainData.add(rowData);
 			}
+			
 			StringBuilder s = new StringBuilder();
 			s.append("{\n    \"colHeaders\":" + colHeaders.toString());
 			s.append(",\n    \"rowHeaders\":" + rowHeaders.toString() + ",\n");
