@@ -57,19 +57,10 @@ public class Converter {
 				}
 				mainData.add(rowData);
 			}
-			jObject.put("data", mainData);
-			jObject.put("colHeaders", colHeaders);
-			jObject.put("rowHeaders", rowHeaders);
-			return toJSONString(jObject);
-		}
-		catch(IOException e){return "";}
-    }
-	
-	public static String toJSONString(JSONObject jObject){
 			StringBuilder s = new StringBuilder();
-			s.append("{\n    \"colHeaders\":" + jObject.get("colHeaders").toString());
-			s.append(",\n    \"rowHeaders\":" + jObject.get("rowHeaders").toString() + ",\n");
-			String[] dataRows = jObject.get("data").toString().split("],"); 
+			s.append("{\n    \"colHeaders\":" + colHeaders.toString());
+			s.append(",\n    \"rowHeaders\":" + rowHeaders.toString() + ",\n");
+			String[] dataRows = mainData.toString().split("],"); 
 			s.append("    \"data\":");							
 			for (String string: dataRows){
 				string = string.replace("\"","");
@@ -78,8 +69,9 @@ public class Converter {
 			s = s.replace(s.length()-16,s.length(),"");
 			s.append("\n    ]\n}");
 			return s.toString();
-	}
-	
+		}
+		catch(IOException e){return "";}
+    }
     
     public static String jsonToCsv(String jsonString) { 
 		try{
@@ -116,8 +108,7 @@ public class Converter {
 				}
 				csvWriter.writeNext(row);
 			}
-			String s = writer.toString();
-			return s.substring(0,s.length());
+			return writer.toString();
 		}
 		catch(ParseException pe){return "";}
     }
