@@ -33,12 +33,13 @@ public class ConverterTest {
             }
         }
         catch(IOException e) { e.printStackTrace(); }
+		jsonContents.deleteCharAt(jsonContents.length()-1);
         jsonString = jsonContents.toString();
     }
     
     @Test
     public void testConvertCSVtoJSON() {
-		assertEquals(jsonString, Converter.csvToJson(csvString) + "\n");
+		assertEquals(jsonString, Converter.csvToJson(csvString));
     }
 
     @Test
@@ -49,13 +50,13 @@ public class ConverterTest {
 	@Test
 	public void testConvertJSONtoCSVtoJSON(){
 		String csvTest = Converter.jsonToCsv(jsonString);
-		String jsonTest = Converter.csvToJson(csvTest) + "\n";
+		String jsonTest = Converter.csvToJson(csvTest);
 		assertEquals(jsonString, jsonTest);
 	}
 	
 	@Test
 	public void testConvertCSVtoJSONtoCSV(){
-		String jsonTest = Converter.csvToJson(csvString) + "\n";
+		String jsonTest = Converter.csvToJson(csvString);
 		String csvTest = Converter.jsonToCsv(jsonTest);
 		assertEquals(csvString, csvTest);
 	}
